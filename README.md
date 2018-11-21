@@ -8,4 +8,6 @@ The following code runs a simple text based pokemon battle game. Here is how the
     The moves can either deal damage, heal, or do both.
     This game continues until one pokemon faints (HP hits 0), and the game ends. 
     The first pokemon to hit 0 HP loses. 
+    
+    **This game is meant to run in the console**
 
