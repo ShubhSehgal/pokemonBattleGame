@@ -88,6 +88,7 @@ def computerFight(computerPokemon):
         computerMove = computerPokemon.move4
         return computerMove
 
+
 def userEffectiveness(userMove, computerPokemon):
 
     if userMove.moveType == "fire":
@@ -173,6 +174,20 @@ def userEffectiveness(userMove, computerPokemon):
         else:
             damage = userMove.damage
             return damage
+
+    elif userMove.moveType == "ice":
+
+        if computerPokemon.type == "fire" or "water" or "ice":
+            damage = userMove.damage / 2
+            return damage
+
+        elif computerPokemon.type == "grass" or "ground" or "dragon":
+            damage = userMove.damage * 2
+            return damage
+
+    else:
+        damage = userMove.damage
+        return damage
 
 def computerEffectiveness(computerMove, userPokemon):
 
@@ -260,6 +275,20 @@ def computerEffectiveness(computerMove, userPokemon):
             damage = computerMove.damage
             return damage
 
+    elif computerMove.moveType == "ice":
+
+        if userPokemon.type == "fire" or "water" or "ice":
+            damage = computerMove.damage / 2
+            return damage
+
+        elif userPokemon.type == "grass" or "ground" or "dragon":
+            damage = computerMove.damage * 2
+            return damage
+
+    else:
+        damage = computerMove.damage
+        return damage
+
 def main():
 
     print("\nWelcome to Pokemon Battle Simulator. Here are the rules. To input, make sure you type in your desired option, or the number corresponding to your desired option. When typing, if there is a space inbetween the words making up the option, combine them.\n For example, the option (3) Fire Blast should be inputed as either fireblast or 3.\n\n Now, let's begin!")
@@ -328,7 +357,7 @@ def main():
         winner = "nobody"
         if userPokemon.speed >= computerPokemon.speed:
 
-            computerPokemon.hp += -1 * (userEffectiveness(userMove, computerPokemon) * userPokemon.attack - (2 * computerPokemon.defense))
+            computerPokemon.hp -= userEffectiveness(userMove, computerPokemon) * userPokemon.attack - (2 * computerPokemon.defense)
             userPokemon.hp += userMove.heal
             print(userPokemon.name + " used " + userMove.name)
 
@@ -338,7 +367,7 @@ def main():
 
             else:
 
-                userPokemon.hp += -1 * (computerEffectiveness(computerMove, userPokemon) * computerPokemon.attack - (2 * userPokemon.defense))
+                userPokemon.hp -= computerEffectiveness(computerMove, userPokemon) * computerPokemon.attack - (2 * userPokemon.defense)
                 computerPokemon.hp += computerMove.heal
                 print(computerPokemon.name + " used " + computerMove.name)
 
@@ -351,7 +380,7 @@ def main():
 
         elif userPokemon.speed < computerPokemon.speed:
 
-            userPokemon.hp += -1 * (computerEffectiveness(computerMove, userPokemon) * computerPokemon.attack - (2 * userPokemon.defense))
+            userPokemon.hp -= computerEffectiveness(computerMove, userPokemon) * computerPokemon.attack - (2 * userPokemon.defense)
             computerPokemon.hp += computerMove.heal
             print(computerPokemon.name + " used " + computerMove.name)
 
@@ -361,7 +390,7 @@ def main():
 
             else:
 
-                computerPokemon.hp += -1 * (userEffectiveness(userMove, computerPokemon) * userPokemon.attack - (2 * computerPokemon.defense))
+                computerPokemon.hp -= userEffectiveness(userMove, computerPokemon) * userPokemon.attack - (2 * computerPokemon.defense)
                 userPokemon.hp += userMove.heal
                 print(userPokemon.name + " used " + userMove.name)
 
